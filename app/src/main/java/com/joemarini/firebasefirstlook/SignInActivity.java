@@ -19,19 +19,18 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignInActivity extends AppCompatActivity
-    implements View.OnClickListener{
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
+
     private final String TAG = "FB_SIGNIN";
 
+    //Add Auth members
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     private EditText etPass;
     private EditText etEmail;
 
-    /**
-     * Standard Activity lifecycle methods
-     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +44,10 @@ public class SignInActivity extends AppCompatActivity
         etEmail = (EditText)findViewById(R.id.etEmailAddr);
         etPass = (EditText)findViewById(R.id.etPassword);
 
-        // TODO: Get a reference to the Firebase auth object
+        // Get a reference to the Firebase auth object
         mAuth = FirebaseAuth.getInstance();
 
-        // TODO: Attach a new AuthListener to detect sign in and out
+        // Attach a new AuthListener to detect sign in and out
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -146,17 +145,14 @@ public class SignInActivity extends AppCompatActivity
 
         // TODO: sign the user in with email and password credentials
         mAuth.signInWithEmailAndPassword(email,password)
-            .addOnCompleteListener(this,
-                new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(SignInActivity.this, "Signed in", Toast.LENGTH_SHORT)
-                                    .show();
+                            Toast.makeText(SignInActivity.this, "Signed in", Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            Toast.makeText(SignInActivity.this, "Sign in failed", Toast.LENGTH_SHORT)
-                                    .show();
+                            Toast.makeText(SignInActivity.this, "Sign in failed", Toast.LENGTH_SHORT).show();
                         }
 
                         updateStatus();
@@ -193,16 +189,14 @@ public class SignInActivity extends AppCompatActivity
 
         // TODO: Create the user account
         mAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this,
-                new OnCompleteListener<AuthResult>() {
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(SignInActivity.this, "User created", Toast.LENGTH_SHORT)
-                                    .show();
+                            Toast.makeText(SignInActivity.this, "User created", Toast.LENGTH_SHORT).show();
+
                         } else {
-                            Toast.makeText(SignInActivity.this, "Account creation failed", Toast.LENGTH_SHORT)
-                                    .show();
+                            Toast.makeText(SignInActivity.this, "Account creation failed", Toast.LENGTH_SHORT).show();
                         }
                     }
             })
